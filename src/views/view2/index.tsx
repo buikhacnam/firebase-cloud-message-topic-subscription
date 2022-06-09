@@ -53,10 +53,11 @@ const View: React.FC<viewProps> = ({}) => {
 		}
 
 	return (
-		<>
+		<div style={{maxWidth: 400, margin: '20px auto'}}>
 			<h1>Firebase - Cloud Messaging</h1>
 
 			<Button
+				size='large'
 				onClick={() => {sendNotiToAll()}}
 				disabled={loading}
 				loading={loading}
@@ -64,9 +65,9 @@ const View: React.FC<viewProps> = ({}) => {
 			>Send Notifications to all user</Button>
 			<br/>
 			<br />
-
-			{payload && JSON.stringify(payload)}
-		</>
+			
+			{payload && JSON.stringify(payload , null, 4)}
+		</div>
 	)
 }
 export default View
