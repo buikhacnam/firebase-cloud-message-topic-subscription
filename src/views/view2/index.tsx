@@ -4,6 +4,8 @@ import { fetchUsers, sendNotiToAllUsers, sendNotiToAUser } from '../../api'
 import { getToken, onMessageListener } from '../../firebaseInit'
 import Cookie from 'js-cookie'
 import {useNavigate} from 'react-router-dom'
+import { Icon } from '@iconify/react';
+
 
 interface viewProps {}
 
@@ -20,7 +22,7 @@ const View: React.FC<viewProps> = ({}) => {
 	const [payloadInd, setPayloadInd] = useState<any>(null)
 
 	const [user, setUser] = useState([])
-	const [searchUser, setSearchUser] = useState('')
+	const [searchUser, setSearchUser] = useState(null)
 
 	console.log('serach user', searchUser)
 	useEffect(() => {
@@ -66,7 +68,7 @@ const View: React.FC<viewProps> = ({}) => {
 		setLoadingInd(true)
 		setPayloadInd('Sending notification...')
 		setPayload(null)
-		const res = await sendNotiToAUser(searchUser)
+		const res = await sendNotiToAUser(searchUser|| '')
 		console.log('res', res)
 		setPayloadInd(res.data)
 		setLoadingInd(false)
@@ -81,16 +83,16 @@ const View: React.FC<viewProps> = ({}) => {
     }
 
 	return (
-		<div style={{textAlign: 'center', height: '100vh', overflow: 'hidden'}}>
+		<div style={{textAlign: 'center', height: '90vh', overflow: 'hidden'}}>
 			<div
 				style={{
-					maxWidth: 400,
+					maxWidth: 450,
 					margin: '20px auto',
 					textAlign: 'center',
 					height: '90%' 
 				}}
 			>
-				<h1>Firebase - Cloud Messaging</h1>
+				<h1><Icon icon="simple-icons:firebase" /> Firebase - Cloud Messaging</h1>
 				<h3>Welcome! <span>{localStorage.getItem('userName')}</span> | <a onClick={() => logoutUser()}>Logout</a></h3>
 
 				<Button
@@ -120,7 +122,7 @@ const View: React.FC<viewProps> = ({}) => {
 					allowClear
 					value={searchUser}
 					showSearch
-					placeholder='send notification to a specific user'
+					placeholder='search a specific user to send notification'
 					onSearch={(e: any) => setSearchUser(e)}
 					style={{ marginTop: 10, width: '100%' }}
 					showArrow={false}
@@ -151,7 +153,7 @@ const View: React.FC<viewProps> = ({}) => {
 					</span>
 				</Button>
 				{payloadInd && <div>{JSON.stringify(payloadInd, null, 4)}</div>}
-				<p style={{marginTop: 30, fontStyle: 'italic', fontSize: '0.8rem'}}>Tips: You can loggin to other devices / accounts to test it more</p>
+				<p style={{marginTop: 30, fontStyle: 'italic', fontSize: '0.8rem'}}>Tips: You can log in to other devices / accounts to test it more</p>
 			</div>
 
 		
