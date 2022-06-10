@@ -52,6 +52,18 @@ export const sendNotiToAllUsers = () => {
 	return API.get(`/api/v1/notification/send/all`)
 }
 
+export const sendNotiToAUser = (userName: string) => {
+	return API.get(`/api/v1/notification/send/to/${userName}`)
+}
+
+export const fetchUsers = (
+	textSearch: string
+) => {
+	return API.get(
+		`api/v1/security/user/search?textSearch=${textSearch}`
+	)
+}
+
 export const fetchOccupation = () => {
 	return axiosCache(`/api/metadata/profile/occupations`, 0.01)
 }

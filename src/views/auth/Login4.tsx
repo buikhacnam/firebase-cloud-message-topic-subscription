@@ -34,10 +34,8 @@ export default function LoginPage() {
 
 	useEffect(() => {
 		let data
-
 		async function tokenFunc() {
 			data = await getToken(setTokenFound)
-			console.log('data', data)
 			if (data) {
 				console.log('Token is', data)
 				setToken(data)
@@ -48,12 +46,9 @@ export default function LoginPage() {
 		tokenFunc()
 	}, [setTokenFound])
 
-
 	useEffect(() => {
-
 		checkServer()
 	}, [])
-
 
 	const validate = (name: string, value: string) => {
 		switch (name) {
@@ -93,10 +88,10 @@ export default function LoginPage() {
 	const checkServer = async () => {
 		try {
 			const res = await test()
-			console.log("dyno is waken up")
+			console.log('dyno is waken up')
 			setReady(true)
-		} catch(err) {
-			message.error("unable to connect to server")
+		} catch (err) {
+			message.error('unable to connect to server')
 		}
 	}
 
@@ -121,27 +116,38 @@ export default function LoginPage() {
 		})
 		dispatch({ type: UserActionTypes.LOGIN_CLEAR_ERROR })
 		if (userName && password) {
-			dispatch(loginUser(values, navigate, token, "web"))
+			dispatch(loginUser(values, navigate, token, 'web'))
 		}
 	}
-
 
 	return (
 		<div style={{ background: '#F9FAFB', height: '100vh' }}>
 			{(loading || !ready) && (
 				<LoadingOverlay>
-					<Spin className='xoay' size='large' tip={!ready? <span style={{fontSize: '40px'}}>Server is waking up...</span> : 'loggin in'}  />
+					<Spin
+						className='xoay'
+						size='large'
+						tip={
+							!ready ? (
+								<span style={{ fontSize: '40px' }}>
+									Server is waking up...
+								</span>
+							) : (
+								'loggin in'
+							)
+						}
+					/>
 				</LoadingOverlay>
 			)}
 			<Wrapper>
 				<Container>
 					<div style={{ textAlign: 'center' }}>
-						
 						<h2 style={{ fontWeight: '800 !important' }}>
 							Sign in to your account
 						</h2>
 						<p>
-							Don't have account yet? <Link to='/signup'>sign up</Link>
+							Don't have account yet?{' '}
+							<Link to='/signup'>sign up</Link>
 						</p>
 					</div>
 					<form onSubmit={e => handleSubmit(e, loginValue)}>
@@ -221,7 +227,7 @@ export default function LoginPage() {
 								</div>
 							</div>
 						</div>
-											
+
 						{(errorInput.userName || errorInput.password) && (
 							<span style={{ color: 'red', fontSize: '0.7rem' }}>
 								User Name hoặc Password không thể bỏ trống!
@@ -263,9 +269,10 @@ export default function LoginPage() {
 								{loading ? 'Signing in ...' : 'Sign in'}
 							</button>
 						</div>
-						<br/>
-						<span>Testing admin account: buinam</span><br></br>
-											<p>password: 1234</p>
+						<br />
+						<span>Testing admin account: buinam</span>
+						<br></br>
+						<p>password: 1234</p>
 					</form>
 				</Container>
 			</Wrapper>

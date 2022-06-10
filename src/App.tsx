@@ -4,8 +4,8 @@ import theme, { GlobalStyle } from './styled/theme'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import decode from 'jwt-decode'
 import Cookies from 'js-cookie'
-import LoadingSpinner from './components/LoadingSpinner'
 import axios from 'axios'
+import { Spin } from 'antd'
 const Components: TODO = {
 	LazyView2: lazy(() => import('./views/view2')),
 	LazyLoginView: lazy(() => import('./views/auth/Login4')),
@@ -64,9 +64,9 @@ const checkAuth2 = () => {return true}
 
 // might need different types of loading later.
 const skeletonMap: TODO = {
-	LazyDashboard: <LoadingSpinner />,
-	LazyView2: <LoadingSpinner />,
-	LazyLoginView: <LoadingSpinner />,
+	LazyDashboard: <div>Loading...</div>,
+	LazyView2: <div>Loading...</div>,
+	LazyLoginView: <div>Loading...</div>,
 }
 
 const LazyComponent = ({ component, ...props }: TODO) => {
@@ -76,7 +76,7 @@ const LazyComponent = ({ component, ...props }: TODO) => {
 	return (
 		<Suspense
 			// fallback={skeletonMap[component]}
-			fallback={<LoadingSpinner />}
+			fallback={<div>Loading...</div>}
 		>
 			{isAuthenticated || component === 'LazyLoginView' ? (
 				<View {...props} />
@@ -103,7 +103,7 @@ const App: React.FC<AppProps> = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 	return (
-		<>
+		<div>
 			<StyleSheetManager disableVendorPrefixes>
 				<ThemeProvider theme={theme}>
 					<GlobalStyle />
@@ -134,7 +134,7 @@ const App: React.FC<AppProps> = () => {
 					</Routes>
 				</ThemeProvider>
 			</StyleSheetManager>
-		</>
+		</div>
 	)
 }
 
