@@ -153,7 +153,9 @@ const View: React.FC<viewProps> = ({}) => {
 					</span>
 				</Button>
 				{payloadInd && <div>{JSON.stringify(payloadInd, null, 4)}</div>}
-				<p style={{marginTop: 30, fontStyle: 'italic', fontSize: '0.8rem'}}>Tips: You can log in to other devices / accounts to test it more</p>
+				<p style={{marginTop: 30, fontStyle: 'italic', fontSize: '0.8rem'}}>Tips:</p>
+					<span style={{fontStyle: 'italic', fontSize: '0.8rem'}}>#1 You can log in to other devices / accounts to test it more</span><br></br>
+					<span style={{fontStyle: 'italic', fontSize: '0.8rem'}}>#2 You may want to allow getting notifications from browser / this website</span>
 			</div>
 
 		
