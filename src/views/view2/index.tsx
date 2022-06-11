@@ -105,7 +105,7 @@ const View: React.FC<viewProps> = ({}) => {
 					danger
 					type='primary'
 				>
-					Send a Notification to all user
+					Send a Notification to all users
 				</Button>
 				<br />
 				<br />
